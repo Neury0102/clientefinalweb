@@ -1,9 +1,12 @@
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static Cliente.Usuario usuario;
+    public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
-        PublicacionUI pb =new PublicacionUI();
-        pb.setVisible(true);
+
+        LoginUI l = new LoginUI();
+        l.setVisible(true);
         System.out.print("hola");
     }
 }

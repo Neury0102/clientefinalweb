@@ -77,13 +77,13 @@ public class PublicacionUI extends JFrame {
         getContentPane().add(lblNewLabel);
 
         Cliente c = new Cliente();
-        ArrayList<String> marcas = new ArrayList<String>();
+        Cliente.Marca[] marcas = {};
         try {
             marcas = c.getMarcas();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        final JComboBox comboBox = new JComboBox(marcas.toArray());
+        final JComboBox comboBox = new JComboBox(marcas);
         comboBox.setBounds(20, 40, 171, 23);
         getContentPane().add(comboBox);
 
@@ -91,7 +91,7 @@ public class PublicacionUI extends JFrame {
         lblNewLabel_1.setBounds(20, 72, 131, 20);
         getContentPane().add(lblNewLabel_1);
 
-        JLabel lblCantidad = new JLabel("Cantidad de Pasajedos");
+        JLabel lblCantidad = new JLabel("Cantidad de Pasajeros");
         lblCantidad.setBounds(20, 120, 131, 23);
         getContentPane().add(lblCantidad);
 
@@ -123,13 +123,13 @@ public class PublicacionUI extends JFrame {
         JLabel lblTipo = new JLabel("Tipo");
         lblTipo.setBounds(20, 273, 131, 23);
         getContentPane().add(lblTipo);
-        ArrayList<String> tipos = new ArrayList<String>();
+        Cliente.Tipo[] tipos = {};
         try {
             tipos = c.getTipos();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        final JComboBox comboBox_2 = new JComboBox(tipos.toArray());
+        final JComboBox comboBox_2 = new JComboBox(tipos);
         comboBox_2.setBounds(19, 291, 172, 23);
         getContentPane().add(comboBox_2);
 
@@ -201,7 +201,7 @@ public class PublicacionUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Cliente ct =new Cliente();
                 try {
-                    ct.initClient(comboBox.getSelectedItem().toString(),textField.getText(),textField_1.getText(),comboBox_1.getSelectedItem().toString(),textField_2.getText(),comboBox_2.getSelectedItem().toString(),textField_4.getText(),textField_5.getText(),textField_6.getText(),comboBox_3.getSelectedItem().toString(),textField_7.getText(),textField_3.getText(),img);
+                    ct.initClient(((Cliente.Marca)(comboBox.getSelectedItem())).getId(),textField.getText(),textField_1.getText(),comboBox_1.getSelectedItem().toString(),textField_2.getText(),((Cliente.Tipo)(comboBox_2.getSelectedItem())).getId(),textField_4.getText(),textField_5.getText(),textField_6.getText(),comboBox_3.getSelectedItem().toString(),textField_7.getText(),textField_3.getText(),img);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
