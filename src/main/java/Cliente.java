@@ -44,7 +44,7 @@ public class Cliente {
 
 
         for(File f : pic){
-            me.addBinaryBody("upfile", f, ContentType.create("application/octet-stream"), "filename");
+            me.addBinaryBody("upfile", f, ContentType.create("application/octet-stream"), f.getName());
         }
         HttpEntity entity = me.build();
 
