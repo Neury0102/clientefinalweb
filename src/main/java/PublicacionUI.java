@@ -27,7 +27,7 @@ public class PublicacionUI extends JFrame {
     private JTextField textField_5;
     private JTextField textField_6;
     private JTextField textField_7;
-    File[] img;
+    File[] img ={};
 
     public PublicacionUI() {
 
@@ -199,9 +199,20 @@ public class PublicacionUI extends JFrame {
         getContentPane().add(btnPublicar);
         btnPublicar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Cliente ct =new Cliente();
+
                 try {
-                    ct.initClient(((Cliente.Marca)(comboBox.getSelectedItem())).getId(),textField.getText(),textField_1.getText(),comboBox_1.getSelectedItem().toString(),textField_2.getText(),((Cliente.Tipo)(comboBox_2.getSelectedItem())).getId(),textField_4.getText(),textField_5.getText(),textField_6.getText(),comboBox_3.getSelectedItem().toString(),textField_7.getText(),textField_3.getText(),img);
+
+                     Cliente.MensajeServidor ms = Cliente.initClient(((Cliente.Marca)(comboBox.getSelectedItem())).getId(),textField.getText(),
+                            textField_1.getText(),comboBox_1.getSelectedItem().toString(),textField_2.getText(),
+                            ((Cliente.Tipo)(comboBox_2.getSelectedItem())).getId(),textField_4.getText(),textField_5.getText(),textField_6.getText(),
+                            comboBox_3.getSelectedItem().toString(),textField_7.getText(),textField_3.getText(),img);
+                     if (ms.getCodigo().equals("0")){
+                         JOptionPane.showMessageDialog(null, "Publicacion creada con exito.");
+                         PublicacionUI.this.dispose();
+                     }
+                    else{
+                         JOptionPane.showMessageDialog(null, "Formulario Invalido!");
+                     }
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }

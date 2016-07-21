@@ -17,8 +17,11 @@ public class VerPublicacionesUI extends JFrame {
         getContentPane().setLayout(null);
         DefaultListModel<Cliente.PublicacionInfo> model = new DefaultListModel<>();
         publicacionesList = new JList(model);
-        publicacionesList.setBounds(113, 44, 173, 179);
-        getContentPane().add(publicacionesList);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(112, 44, 146, 159);
+        getContentPane().add(scrollPane);
+
+        scrollPane.setViewportView(publicacionesList);
         for (Cliente.PublicacionInfo p : publicaciones){
             model.addElement(p);
         }
@@ -35,8 +38,9 @@ public class VerPublicacionesUI extends JFrame {
                 dp.setVisible(true);
             }
         });
-        btnVerPublicacion.setBounds(113, 249, 173, 25);
+        btnVerPublicacion.setBounds(102, 247, 173, 25);
         getContentPane().add(btnVerPublicacion);
+
         JLabel lblPublicacionesDisponibles = new JLabel("Publicaciones Disponibles");
         lblPublicacionesDisponibles.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblPublicacionesDisponibles.setBounds(102, 15, 237, 16);

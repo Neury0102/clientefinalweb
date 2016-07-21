@@ -22,14 +22,12 @@ import org.apache.http.message.BasicNameValuePair;
 import javax.imageio.ImageIO;
 
 public class Cliente {
-    public static void initClient(String marca, String anio, String cantidadp, String tipocombustible, String precio, String tipo, String modelo, String uso, String cantidadc, String tipotransmision, String duracionp, String observacion, File[] pic) throws ClientProtocolException, IOException {
+    public static MensajeServidor initClient(String marca, String anio, String cantidadp, String tipocombustible, String precio, String tipo, String modelo, String uso, String cantidadc, String tipotransmision, String duracionp, String observacion, File[] pic) throws ClientProtocolException, IOException {
 
         HttpClient client = new DefaultHttpClient();
 
-
         MultipartEntityBuilder me = MultipartEntityBuilder
                 .create()
-                // .addTextBody("number", pic)
                 .addTextBody("marca", marca)
                 .addTextBody("anio", anio)
                 .addTextBody("pasajeros", cantidadp)
@@ -53,7 +51,24 @@ public class Cliente {
         HttpPost httpPost = new HttpPost("http://localhost:4567/restServices/crearPublicacion");
         httpPost.setEntity(entity);
         HttpResponse response = client.execute(httpPost);
-        HttpEntity result = response.getEntity();
+        BufferedReader rd = null;
+        try {
+            rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String line = "";
+        String mensaje = "";
+
+        while ((line = rd.readLine()) != null) {
+            mensaje += line;
+        }
+        System.out.print(mensaje);
+        Gson gson = new Gson();
+        MensajeServidor ms = gson.fromJson(mensaje, MensajeServidor.class);
+        return ms;
+
+
     }
 
     public Marca[] getMarcas() throws IOException {
@@ -111,8 +126,7 @@ public class Cliente {
         }
         Gson gson = new Gson();
         PublicacionInfo[] pi = gson.fromJson(mensaje,PublicacionInfo[].class) ;
-        System.out.print(pi[0].getImagenes().get(0));
-//        InputStream stream = new ByteArrayInputStream(Base64.decode(pi[0].getImagenes().get(0)));
+        System.out.print(mensaje);
         return pi;
 
 
@@ -307,6 +321,27 @@ public class Cliente {
 
         public String toString(){
             return this.nombre;
+        }
+    }
+
+    public class MensajeServidor{
+        private String codigo;
+        private String mensaje;
+
+        public String getCodigo() {
+            return codigo;
+        }
+
+        public void setCodigo(String codigo) {
+            this.codigo = codigo;
+        }
+
+        public String getMensaje() {
+            return mensaje;
+        }
+
+        public void setMensaje(String mensaje) {
+            this.mensaje = mensaje;
         }
     }
 
