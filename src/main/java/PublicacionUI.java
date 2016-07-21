@@ -27,6 +27,7 @@ public class PublicacionUI extends JFrame {
     private JTextField textField_5;
     private JTextField textField_6;
     private JTextField textField_7;
+    private JLabel lblArchivos;
     File[] img ={};
 
     public PublicacionUI() {
@@ -55,6 +56,7 @@ public class PublicacionUI extends JFrame {
 //                        PublicacionUI.this.img = Base64.encode(os.toByteArray());
 
                         PublicacionUI.this.img = chooser.getSelectedFiles();
+                        lblArchivos.setText(chooser.getSelectedFiles().length + " archivos seleccionados");
 
 
 //
@@ -71,6 +73,10 @@ public class PublicacionUI extends JFrame {
         textField.setBounds(20, 89, 171, 20);
         getContentPane().add(textField);
         textField.setColumns(10);
+
+        lblArchivos = new JLabel("");
+        lblArchivos.setBounds(161, 412, 150, 16);
+        getContentPane().add(lblArchivos);
 
         JLabel lblNewLabel = new JLabel("Marca");
         lblNewLabel.setBounds(20, 19, 52, 23);
@@ -134,7 +140,7 @@ public class PublicacionUI extends JFrame {
         getContentPane().add(comboBox_2);
 
         JLabel lblObservacionesParticulares = new JLabel("Observaciones Particulares");
-        lblObservacionesParticulares.setBounds(20, 320, 131, 23);
+        lblObservacionesParticulares.setBounds(20, 320, 200, 23);
         getContentPane().add(lblObservacionesParticulares);
 
         textField_3 = new JTextField();
